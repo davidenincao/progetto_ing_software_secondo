@@ -1,0 +1,33 @@
+MapTest
+    int size();
+    boolean isEmpty();
+    boolean containsKey(Object key);
+    boolean containsValue(Object value);
+    Object get(Object key);
+    void put(Object key, Object value);
+    Object remove(Object key);
+    void putAll(HMap m);
+    void clear();
+    boolean equals(Object o);
+    int hashCode();
+
+KeySetTest
+    HSet keySet();
+    All methods of HSet on HSet keySet();
+
+KeySetIteratorTest
+    All methods of HIterator on HSet keySet();
+
+ValuesCollectionTest
+    HCollection values();
+    All methods of HCollection on HCollection values();
+
+ValuesCollectionIteratorTest
+    All methods of HIterator on HCollection values();
+
+EntrySetTest
+    HSet entrySet();
+    All methods of HSet on HSet entrySet();
+
+EntrySetIteratorTest
+    All methods of HIterator on HSet entrySet();

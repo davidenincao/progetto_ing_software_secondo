@@ -5,18 +5,23 @@ package myAdapter;
  * della versione J2SE 1.4.2
  */
 public interface HMap {
-    void clear();
+    /**
+     * Restituisce il numero di elementi presenti nella lista.
+     *
+     * @return il numero di elementi presenti nella lista.
+     */
+    int size();
+    boolean isEmpty();
     boolean containsKey(Object key);
     boolean containsValue(Object value);
+    Object get(Object key);
+    void put(Object key, Object value);
+    Object remove(Object key);
+    void putAll(HMap m);
+    void clear();
+    HSet keySet();
+    HCollection values();
     HSet entrySet();
     boolean equals(Object o);
-    Object get(Object key);
     int hashCode();
-    boolean isEmpty();
-    HSet keySet();
-    void put(Object key, Object value);
-    void putAll(HMap m);
-    Object remove(Object key);
-    int size();
-    HCollection values();
 }

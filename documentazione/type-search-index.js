@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"myAdapter","l":"HCollection"},{"p":"myAdapter","l":"HIterator"},{"p":"myAdapter","l":"HMap"},{"p":"myAdapter","l":"HSet"},{"p":"myAdapter","l":"MapAdapter"},{"p":"myTest","l":"MapAdapterTest"},{"p":"myTest","l":"TestRunner"}];updateSearchResults();

@@ -5,19 +5,19 @@ package myAdapter;
  * della versione J2SE 1.4.2
  */
 public interface HCollection {
-    boolean add(Object o);
-    boolean addAll(HCollection c);
-    void clear();
-    boolean contains(Object o);
-    boolean containsAll(HCollection c);
-    boolean equals(Object o);
-    int hashCode();
-    boolean isEmpty();
-    HIterator iterator();
-    boolean remove(Object o);
-    boolean removeAll(HCollection c);
-    boolean retainAll(HCollection c);
     int size();
+    boolean isEmpty();
+    boolean contains(Object o);
+    HIterator iterator();
     Object[] toArray();
     Object[] toArray(Object[] a);
+    boolean add(Object o);
+    boolean remove(Object o);
+    boolean containsAll(HCollection c);
+    boolean addAll(HCollection c);
+    boolean removeAll(HCollection c);
+    boolean retainAll(HCollection c);
+    void clear();
+    boolean equals(Object o);
+    int hashCode();
 }
