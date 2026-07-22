@@ -34,6 +34,7 @@ public interface HMap {
     *
     * @param value il valore di cui verificare la presenza.
     * @return true se la mappa contiene il valore specificato.
+    * @throws NullPointerException se il valore specificato è null.
     */
     boolean containsValue(Object value);
 
@@ -47,10 +48,33 @@ public interface HMap {
     */
     Object get(Object key);
 
-    void put(Object key, Object value);
+    /**
+    * Associa il valore specificato alla chiave specificata. Se la chiave è già presente nella mappa, il valore associato viene sostituito.
+    *
+    * @param key la chiave a cui associare il valore.
+    * @param value il valore da associare alla chiave.
+    * @return il valore precedentemente associato alla chiave specificata, o null se la chiave non era presente.
+    * @throws NullPointerException se la chiave o il valore specificato sono null.
+    */
+    Object put(Object key, Object value);
 
+    /**
+    * Rimuove la coppia chiave-valore associata alla chiave specificata. Restituisce il valore precedentemente associato alla chiave, 
+    * o null se la chiave non era presente.
+    *
+    * @param key la chiave della coppia chiave-valore da rimuovere.
+    * @return il valore precedentemente associato alla chiave specificata, o null se la chiave non era presente.
+    * @throws NullPointerException se la chiave specificata è null.
+    */
     Object remove(Object key);
 
+    /**
+    * Copia tutte le coppie chiave-valore dalla mappa specificata a questa mappa. Se una chiave è già presente, 
+    * il valore associato viene sostituito.
+    *
+    * @param m la mappa da cui copiare le coppie chiave-valore.
+    * @throws NullPointerException se la mappa specificata è null o contiene chiavi o valori null.
+    */
     void putAll(HMap m);
 
     void clear();

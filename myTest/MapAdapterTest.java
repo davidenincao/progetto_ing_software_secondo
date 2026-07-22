@@ -171,7 +171,7 @@ public class MapAdapterTest {
         //ARRANGE
         map.put("A", "ALFA");
         //ACT
-        boolean containsKey = map.containsKey("A");
+        boolean containsKey = map.containsKey(new String("A"));
         //ASSERT
         assertTrue("La mappa non contiene la chiave", containsKey);
     }
@@ -254,7 +254,7 @@ public class MapAdapterTest {
         //ARRANGE
         map.put("A", "ALFA");
         //ACT
-        boolean containsValue = map.containsValue("ALFA");
+        boolean containsValue = map.containsValue(new String("ALFA"));
         //ASSERT
         assertTrue("La mappa non contiene il valore", containsValue);
     }
@@ -276,7 +276,7 @@ public class MapAdapterTest {
         map.put("A", "ALFA");
         map.put("B", "ALFA");
         //ACT
-        boolean containsValue = map.containsValue("ALFA");
+        boolean containsValue = map.containsValue(new String("ALFA"));
         //ASSERT
         assertTrue("La mappa non contiene il valore usando containsValue() con occorrenze multiple", containsValue);
     }
@@ -300,6 +300,25 @@ public class MapAdapterTest {
         boolean containsValue = map.containsValue("BETA");
         //ASSERT
         assertFalse("La mappa contiene il valore", containsValue);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test(expected = NullPointerException.class)
+    public void testContainsValueNullPointer() {
+        //ARRANGE
+        //ACT
+        map.containsValue(null);
+        //ASSERT
     }
 
     // Object get(Object key); ---------------------------------------------------------------------------------
@@ -340,7 +359,7 @@ public class MapAdapterTest {
         //ARRANGE
         map.put("A", "ALFA");
         //ACT
-        Object value = map.get("A");
+        Object value = map.get(new String("A"));
         //ASSERT
         assertEquals("La mappa non ritorna il valore corretto tramite get()", "ALFA", value);
     }
@@ -386,9 +405,322 @@ public class MapAdapterTest {
     }
 
     // void put(Object key, Object value); ---------------------------------------------------------------------
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testPutNewAssociation() {
+        //ARRANGE
+        //ACT
+        Object oldValue = map.put("A", "ALFA");
+        //ASSERT
+        assertNull("La mappa ritorna un valore non nullo tramite put() con chiave assente", oldValue);
+        assertTrue("La mappa non contiene la chiave appena inserita tramite put()", map.containsKey("A"));
+        assertTrue("La mappa non contiene il valore appena inserito tramite put()", map.containsValue("ALFA"));
+        assertEquals("La mappa non ritorna il valore corretto tramite get() dopo put()", "ALFA", map.get("A"));
+        assertEquals("La mappa non ha dimensione 1 dopo put()", 1, map.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testPutUpdateAssociation() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        //ACT
+        Object oldValue = map.put(new String("A"), "BETA");
+        //ASSERT
+        assertEquals("La mappa non ritorna il valore corretto tramite put() con chiave presente", "ALFA", oldValue);
+        assertTrue("La mappa non contiene più la chiave dopo aver modificato l'associazione tramite put()", map.containsKey("A"));
+        assertTrue("La mappa non contiene il valore appena inserito tramite put()", map.containsValue("BETA"));
+        assertFalse("La mappa contiene il vecchio valore dopo put()", map.containsValue("ALFA"));
+        assertEquals("La mappa non ritorna il valore corretto tramite get() dopo put()", "BETA", map.get("A"));
+        assertEquals("La mappa non ha più dimensione 1 dopo aver modificato l'associazione tramite put()", 1, map.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test(expected = NullPointerException.class)
+    public void testPutNullKey() {
+        //ARRANGE
+        //ACT
+        map.put(null, "ALFA");
+        //ASSERT
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test(expected = NullPointerException.class)
+    public void testPutNullValue() {
+        //ARRANGE
+        //ACT
+        map.put("A", null);
+        //ASSERT
+    }
+
     // Object remove(Object key); ------------------------------------------------------------------------------
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testRemoveWithPresentKey() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        map.put("C", "CHARLIE");
+        //ACT
+        Object removedValue = map.remove(new String("A"));
+        //ASSERT
+        assertEquals("La mappa non ritorna il valore corretto tramite remove() con chiave presente", "ALFA", removedValue);
+        assertFalse("La mappa contiene la chiave dopo averla rimossa tramite remove()", map.containsKey("A"));
+        assertFalse("La mappa contiene il valore dopo averlo rimosso tramite remove()", map.containsValue("ALFA"));
+        assertNull("La mappa non ritorna null tramite get() dopo remove()", map.get("A"));
+        assertEquals("remove() ha modificato le altre associazioni nella mappa", "BETA", map.get("B"));
+        assertEquals("remove() ha modificato le altre associazioni nella mappa", "CHARLIE", map.get("C"));
+        assertEquals("La mappa non ha dimensione 2 dopo aver rimosso un elemento tramite remove()", 2, map.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testRemoveMakesEmpty() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        //ACT
+        Object removedValue = map.remove(new String("A"));
+        //ASSERT
+        assertEquals("La mappa non ritorna il valore corretto tramite remove() con chiave presente", "ALFA", removedValue);
+        assertEquals("La mappa non ha dimensione 0 dopo aver rimosso l'unico elemento tramite remove()", 0, map.size());
+        assertTrue("La mappa non è vuota dopo aver rimosso l'unico elemento tramite remove()", map.isEmpty());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testRemoveWithAbsentKey() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        //ACT
+        Object removedValue = map.remove("B");
+        //ASSERT
+        assertNull("La mappa non ritorna null tramite remove() con chiave assente", removedValue);
+        assertEquals("La mappa non ritorna il valore corretto tramite get() dopo aver rimosso un elemento inesistente", "ALFA", map.get("A"));
+        assertEquals("La mappa non ha dimensione 1 dopo aver rimosso un elemento inesistente tramite remove()", 1, map.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test(expected = NullPointerException.class)
+    public void testRemoveNullKey() {
+        //ARRANGE
+        //ACT
+        map.remove(null);
+        //ASSERT
+    }
+
     // void putAll(HMap m); ------------------------------------------------------------------------------------
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testPutAllWithEmptyMap() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HMap otherMap = new MapAdapter();
+        //ACT
+        map.putAll(otherMap);
+        //ASSERT
+        assertEquals("putAll() con una mappa vuota non deve modificare la dimensione", 2, map.size());
+        assertEquals("putAll() con una mappa vuota non deve modificare le associazioni esistenti", "ALFA", map.get("A"));
+        assertEquals("putAll() con una mappa vuota non deve modificare le associazioni esistenti", "BETA", map.get("B"));
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testPutAllWithNewAssociations() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HMap otherMap = new MapAdapter();
+        otherMap.put("C", "CHARLIE");
+        otherMap.put("D", "DELTA");
+        //ACT
+        map.putAll(otherMap);
+        //ASSERT
+        assertEquals("putAll() deve inserire tutte le nuove associazioni", "CHARLIE", map.get("C"));
+        assertEquals("putAll() deve inserire tutte le nuove associazioni", "DELTA", map.get("D"));
+        assertEquals("putAll() non deve modificare le associazioni già presenti", "ALFA", map.get("A"));
+        assertEquals("putAll() non deve modificare le associazioni già presenti", "BETA", map.get("B"));
+        assertEquals("L'inserimento di due nuove associazioni deve portare la dimensione a 4", 4, map.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testPutAllWithExistingAssociations() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HMap otherMap = new MapAdapter();
+        otherMap.put("C", "CHARLIE");
+        otherMap.put("A", "DELTA");
+        //ACT
+        map.putAll(otherMap);
+        //ASSERT
+        assertEquals("putAll() deve inserire tutte le nuove associazioni", "CHARLIE", map.get("C"));
+        assertEquals("putAll() deve modificare le associazioni con stessa chiave", "DELTA", map.get("A"));
+        assertEquals("putAll() non deve modificare le associazioni già presenti", "BETA", map.get("B"));
+        assertEquals("L'inserimento di una nuova associazione deve portare la dimensione a 3", 3, map.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testPutAllWithSameMap() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        //ACT
+        map.putAll(map);
+        //ASSERT
+        assertEquals("putAll() con la stessa mappa non deve modificare le associazioni", "ALFA", map.get("A"));
+        assertEquals("putAll() con la stessa mappa non deve modificare le associazioni", "BETA", map.get("B"));
+        assertEquals("La dimensione deve rimanere invariata dopo putAll() con la stessa mappa", 2, map.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test(expected = NullPointerException.class)
+    public void testPutAllNullMap() {
+        //ARRANGE
+        //ACT
+        map.putAll(null);
+        //ASSERT
+    }
+
     // void clear(); -------------------------------------------------------------------------------------------
+
+    
+
     // boolean equals(Object o); -------------------------------------------------------------------------------
     // int hashCode(); -----------------------------------------------------------------------------------------
 

@@ -8,16 +8,37 @@ MapTest
         testIsEmptyOnEmptyMap
         testIsEmptyAfterOneInsertion
     boolean containsKey(Object key);
+        testContainsKeyOnEmptyMap
+        testContainsKeyWithPresentKey
+        testContainsKeyWithAbsentKey
+        testContainsKeyNullPointer
     boolean containsValue(Object value);
+        testContainsValueOnEmptyMap
+        testContainsValueWithPresentValue
+        testContainsValueWithMultiplePresentValue
+        testContainsValueWithAbsentValue
+        testContainsValueNullPointer
     Object get(Object key);
         testGetOnEmptyMap
         testGetWithPresentKey
-        testGetWithEqualButDistinctKey
         testGetWithAbsentKey
         testGetNullPointer
     void put(Object key, Object value);
+        testPutNewAssociation
+        testPutUpdateAssociation
+        testPutNullKey
+        testPutNullValue
     Object remove(Object key);
+        testRemoveWithPresentKey
+        testRemoveMakesEmpty
+        testRemoveWithAbsentKey
+        testRemoveNullKey
     void putAll(HMap m);
+        testPutAllWithEmptyMap
+        testPutAllWithNewAssociations
+        testPutAllWithExistingAssociations
+        testPutAllWithSameMap
+        testPutAllNullMap
     void clear();
     boolean equals(Object o);
     int hashCode();
