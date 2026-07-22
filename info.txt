@@ -1,6 +1,6 @@
 TEST sui Costruttori
 
-MapTest
+MapAdapterTest
     int size();
         testSizeOnEmptyMap
         testSizeAfterOneInsertion
@@ -40,8 +40,21 @@ MapTest
         testPutAllWithSameMap
         testPutAllNullMap
     void clear();
+        testClearWithEmptyMap
+        testClearWithNotEmptyMap
     boolean equals(Object o);
+        testEqualsWithEqualMaps
+        testEqualsWithDifferentKeys
+        testEqualsWithDifferentValues
+        testEqualsWithDifferentSizes
+        testEqualsEmptyMaps
+        testEqualsSameMap
+        testEqualsToObject
+        testEqualsToNull
     int hashCode();
+        testHashCodeExpected
+        testHashCodeEqualMaps
+        testHashCodeEmptyMap
 
 KeySetTest
     HSet keySet();

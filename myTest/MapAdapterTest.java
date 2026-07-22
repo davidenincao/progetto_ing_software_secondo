@@ -719,10 +719,310 @@ public class MapAdapterTest {
 
     // void clear(); -------------------------------------------------------------------------------------------
 
-    
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testClearWithEmptyMap() {
+        //ARRANGE
+        //ACT
+        map.clear();
+        //ASSERT
+        assertEquals("clear() con una mappa vuota non deve modificare la dimensione", 0, map.size());
+        assertTrue("clear() con una mappa vuota non deve modificare lo stato della mappa", map.isEmpty());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testClearWithNotEmptyMap() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        //ACT
+        map.clear();
+        //ASSERT
+        assertEquals("clear() deve impostare la dimensione a 0", 0, map.size());
+        assertTrue("clear() deve svuotare la mappa", map.isEmpty());
+        assertFalse("clear() deve rimuovere la chiave A", map.containsKey("A"));
+        assertFalse("clear() deve rimuovere la chiave B", map.containsKey("B"));
+    }
 
     // boolean equals(Object o); -------------------------------------------------------------------------------
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testEqualsWithEqualMaps() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HMap otherMap = new MapAdapter();
+        otherMap.put(new String("B"), new String("BETA"));
+        otherMap.put(new String("A"), new String("ALFA"));
+        //ACT
+        boolean result = map.equals(otherMap);
+        //ASSERT
+        assertTrue("Due mappe uguali devono essere uguali", result);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testEqualsWithDifferentKeys() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HMap otherMap = new MapAdapter();
+        otherMap.put("A", "ALFA");
+        otherMap.put("D", "BETA");
+        //ACT
+        boolean result = map.equals(otherMap);
+        //ASSERT
+        assertFalse("Le mappe con chiavi diverse non devono essere uguali", result);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testEqualsWithDifferentValues() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HMap otherMap = new MapAdapter();
+        otherMap.put("A", "ALFA");
+        otherMap.put("B", "DELTA");
+        //ACT
+        boolean result = map.equals(otherMap);
+        //ASSERT
+        assertFalse("Le mappe con valori diversi non devono essere uguali", result);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testEqualsWithDifferentSizes() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HMap otherMap = new MapAdapter();
+        otherMap.put("A", "ALFA");
+        //ACT
+        boolean result = map.equals(otherMap);
+        //ASSERT
+        assertFalse("Le mappe con dimensioni diverse non devono essere uguali", result);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testEqualsEmptyMaps() {
+        //ARRANGE
+        HMap otherMap = new MapAdapter();
+        //ACT
+        boolean result = map.equals(otherMap);
+        //ASSERT
+        assertTrue("Due mappe vuote devono essere uguali", result);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testEqualsSameMap() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        //ACT
+        boolean result = map.equals(map);
+        //ASSERT
+        assertTrue("Una mappa deve essere uguale a se stessa", result);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testEqualsToObject() {
+        //ARRANGE
+        //ACT
+        boolean result = map.equals("A");
+        //ASSERT
+        assertFalse("Una mappa non puó essere uguale a un oggetto diverso", result);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testEqualsToNull() {
+        //ARRANGE
+        //ACT
+        boolean result = map.equals(null);
+        //ASSERT
+        assertFalse("Una mappa non puó essere uguale a null", result);
+    }
+
     // int hashCode(); -----------------------------------------------------------------------------------------
 
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testHashCodeExpected() {
+        //ARRANGE
+        String key1 = "A";
+        String value1 = "ALFA";
+        String key2 = "B";
+        String value2 = "BETA";
+        map.put(key1, value1);
+        map.put(key2, value2);
+        //ACT
+        expectedHashCode += key1.hashCode() ^ value1.hashCode();
+        expectedHashCode += key2.hashCode() ^ value2.hashCode();
+        int result = map.hashCode();
+        //ASSERT
+        assertEquals("Il codice hash di una mappa deve essere uguale al valore atteso", expectedHashCode, result);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testHashCodeEqualMaps() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HMap otherMap = new MapAdapter();
+        otherMap.put("A", "ALFA");
+        otherMap.put("B", "BETA");
+        //ACT
+        int result = map.hashCode();
+        int otherResult = otherMap.hashCode();
+        //ASSERT
+        assertEquals("I codici hash di mappe uguali devono essere uguali", result, otherResult);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testHashCodeEmptyMap() {
+        //ARRANGE
+        //ACT
+        int result = map.hashCode();
+        //ASSERT
+        assertEquals("Il codice hash di una mappa vuota deve essere 0", 0, result);
+    }
 
 }

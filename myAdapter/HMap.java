@@ -77,6 +77,9 @@ public interface HMap {
     */
     void putAll(HMap m);
 
+    /**
+    * Rimuove tutte le coppie chiave-valore dalla mappa.
+    */
     void clear();
 
     HSet keySet();
@@ -85,7 +88,19 @@ public interface HMap {
 
     HSet entrySet();
 
+    /**
+    * Compara l'oggetto specificato con questa mappa per verificare se sono uguali. Due mappe sono considerate uguali se contengono 
+    * le stesse coppie chiave-valore.
+    *
+    * @param o l'oggetto da confrontare con questa mappa.
+    * @return true se l'oggetto è uguale a questa mappa.
+    */
     boolean equals(Object o);
 
+    /**
+    * Restituisce il codice hash di questa mappa. Il codice hash è calcolato come la somma del codice hash delle entry della mappa.
+    *
+    * @return il codice hash di questa mappa.
+    */
     int hashCode();
 }
