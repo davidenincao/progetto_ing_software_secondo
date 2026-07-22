@@ -1,9 +1,20 @@
+TEST sui Costruttori
+
 MapTest
     int size();
+        testSizeOnEmptyMap
+        testSizeAfterOneInsertion
     boolean isEmpty();
+        testIsEmptyOnEmptyMap
+        testIsEmptyAfterOneInsertion
     boolean containsKey(Object key);
     boolean containsValue(Object value);
     Object get(Object key);
+        testGetOnEmptyMap
+        testGetWithPresentKey
+        testGetWithEqualButDistinctKey
+        testGetWithAbsentKey
+        testGetNullPointer
     void put(Object key, Object value);
     Object remove(Object key);
     void putAll(HMap m);
@@ -31,3 +42,11 @@ EntrySetTest
 
 EntrySetIteratorTest
     All methods of HIterator on HSet entrySet();
+
+
+Summary	Che cosa verifica?
+Test Case Design	Perché serve questo caso? Il caso verifica il comportamento di [metodo] nella condizione [categoria del caso], allo scopo di verificare [parte del contratto].
+Test Description	Descrizione dell'intera sequenza Arrange → Act → Assert
+Pre-Condition	Stato ottenuto dopo Arrange, prima di Act
+Post-Condition	Stato dopo Act
+Expected Results	Condizione verificata in Assert
