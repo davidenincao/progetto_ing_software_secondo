@@ -13,7 +13,7 @@ import myAdapter.*;
  * <li><b>Test Case Design:</b> </li>
  * </ul>
  */
-public class IteratorTest {
+public class ValuesIteratorTest {
 
     MapAdapter map = null;
 
@@ -264,8 +264,10 @@ public class IteratorTest {
         //ACT
         iterator.remove();
         //ASSERT
-        assertFalse("remove() rimuove l'elemento corretto", values.contains(result));
-        assertEquals("La dimensione della collezione di valori è corretta dopo la rimozione", 1, values.size());
+        assertFalse("remove() non rimuove l'elemento corretto", values.contains(result));
+        assertEquals("La dimensione della collezione di valori non è corretta dopo la rimozione", 1, values.size());
+        assertFalse("remove() non si propaga su map", map.containsValue(result));
+        assertEquals("La dimensione della mappa non viene modificata dopo la rimozione sulla collezzione", 1, map.size());
     }
 
     /**
@@ -292,7 +294,8 @@ public class IteratorTest {
             iterator.remove();
         }
         //ASSERT
-        assertEquals("La collezione di valori è vuota dopo la rimozione di tutti gli elementi", 0, values.size());
+        assertEquals("La collezione di valori non è vuota dopo la rimozione di tutti gli elementi", 0, values.size());
+        assertEquals("La mappa non è vuota dopo la rimozione di tutti gli elementi dalla collezione di valori", 0, map.size());
     }
 
     /**
