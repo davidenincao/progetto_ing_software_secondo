@@ -90,8 +90,20 @@ KeySetIteratorTest
         Object next();
         void remove();
 
-ValuesCollectionTest
+ValuesBackingTest
     HCollection values();
+        testValuesEmptyMap
+        testValuesMap
+        testValuesMapWithDuplicates
+    All methods that modify map
+        testValuesBackedOnMapPutNewAssociation
+        testValuesBackedOnMapPutUpdateAssociation
+        testValuesBackedOnMapRemove
+        testValuesBackedOnMapPutAllWithNewAssociations
+        testValuesBackedOnMapPutAllWithExistingAssociations
+        testValuesBackedOnMapClear
+
+ValuesCollectionTest
     All methods of HCollection on HCollection values();
         int size();
             testSizeOnEmptyCollection
