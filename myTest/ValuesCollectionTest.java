@@ -194,6 +194,53 @@ public class ValuesCollectionTest {
     }
 
     // HIterator iterator(); -----------------------------------------------------------------------------------
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testIteratorReturnsNonNullIterator() {
+        //ARRANGE
+        HCollection values = map.values();
+        //ACT
+        HIterator iterator = values.iterator();
+        //ASSERT
+        assertNotNull("L'iteratore su collection vuota è null", iterator);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testIteratorReturnsIndependentIterators() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        HCollection values = map.values();
+        //ACT
+        HIterator iterator1 = values.iterator();
+        iterator1.next();
+        HIterator iterator2 = values.iterator();
+        //ASSERT
+        assertNotSame("Gli iteratori restituiti da collection.iterator() sono lo stesso oggetto", iterator1, iterator2);
+        assertNotEquals("Gli iteratori restituiti da collection.iterator() non sono indipendenti", iterator1.hasNext(), iterator2.hasNext());
+    }
+
     // Object[] toArray(); -------------------------------------------------------------------------------------
 
     /**

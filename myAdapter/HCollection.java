@@ -29,6 +29,12 @@ public interface HCollection {
     */
     boolean contains(Object o);
 
+    /**
+     * Restituisce un iteratore per scorrere gli elementi della collezione. Non ci sono garanzie sull'ordine degli elementi restituiti 
+     * dall'iteratore.
+     *
+     * @return un iteratore per scorrere gli elementi della collezione.
+     */
     HIterator iterator();
 
     /**

@@ -104,6 +104,8 @@ ValuesCollectionTest
             testContainsFalse
             testContainsNullPointer
         HIterator iterator();
+            testIteratorReturnsNonNullIterator
+            testIteratorReturnsIndependentIterators
         Object[] toArray();
             testToArray
             testToArrayEmptyCollection
@@ -151,6 +153,19 @@ ValuesCollectionTest
 
 ValuesCollectionIteratorTest
     All methods of HIterator on HCollection values();
+        boolean hasNext();
+            testHasNextOnEmptyCollection
+            testHasNextCollectionStart
+            testHasNextCollectionEnd
+        Object next();
+            testNextNoSuchElementException
+            testNextCompleteIteration
+            testNextCompleteIterationDuplicatedValues
+        void remove();
+            testRemoveLegalState
+            testRemoveAll
+            testRemoveIllegalState
+            testRemoveTwice
 
 EntrySetTest
     HSet entrySet();
