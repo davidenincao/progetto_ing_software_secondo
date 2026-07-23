@@ -59,13 +59,55 @@ MapAdapterTest
 KeySetTest
     HSet keySet();
     All methods of HSet on HSet keySet();
+        int size();
+            testSizeOnEmptySet
+            testSizeAfterOneInsertion
+        boolean isEmpty();
+            testIsEmptyOnEmptySet
+            testIsEmptyAfterOneInsertion
+        boolean contains(Object o);
+            testContainsTrue
+            testContainsFalse
+            testContainsNullPointer
+        HIterator iterator();
+        Object[] toArray();
+        Object[] toArray(Object[] a);
+        boolean add(Object o);
+            testAdd
+        boolean remove(Object o);
+        boolean containsAll(HCollection c);
+        boolean addAll(HCollection c);
+            testAddAll
+        boolean removeAll(HCollection c);
+        boolean retainAll(HCollection c);
+        void clear();
+        boolean equals(Object o);
+        int hashCode();
 
 KeySetIteratorTest
     All methods of HIterator on HSet keySet();
+        boolean hasNext();
+        Object next();
+        void remove();
 
 ValuesCollectionTest
     HCollection values();
     All methods of HCollection on HCollection values();
+        int size();
+        boolean isEmpty();
+        boolean contains(Object o);
+        HIterator iterator();
+        Object[] toArray();
+        Object[] toArray(Object[] a);
+        boolean add(Object o);
+        boolean remove(Object o);
+        boolean containsAll(HCollection c);
+        boolean addAll(HCollection c);
+        boolean removeAll(HCollection c);
+        boolean retainAll(HCollection c);
+        void clear();
+        boolean equals(Object o);
+        int hashCode();
 
 ValuesCollectionIteratorTest
     All methods of HIterator on HCollection values();

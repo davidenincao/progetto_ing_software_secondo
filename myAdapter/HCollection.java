@@ -7,7 +7,16 @@ package myAdapter;
 public interface HCollection {
     int size();
     boolean isEmpty();
+
+    /**
+    * Restituisce true se l'insieme contiene l'oggetto specificato.
+    *
+    * @param o l'oggetto di cui verificare la presenza.
+    * @return true se l'insieme contiene l'oggetto specificato.
+    * @throws NullPointerException se l'oggetto specificato è null.
+    */
     boolean contains(Object o);
+    
     HIterator iterator();
     Object[] toArray();
     Object[] toArray(Object[] a);

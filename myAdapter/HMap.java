@@ -82,6 +82,12 @@ public interface HMap {
     */
     void clear();
 
+    /**
+    * Restituisce un HSet che è una vista delle chiavi presenti in questa mappa. Le modifiche alla mappa si riflettono nell'HSet e viceversa.
+    * Se la mappa viene modificata mentre si itera sull'HSet, il comportamento dell'iteratore è indefinito. Non supporta add e addAll.
+    *
+    * @return un HSet che è una vista delle chiavi presenti in questa mappa.
+    */
     HSet keySet();
 
     HCollection values();
