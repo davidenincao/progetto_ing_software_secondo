@@ -56,8 +56,11 @@ MapAdapterTest
         testHashCodeEqualMaps
         testHashCodeEmptyMap
 
-KeySetTest
+KeySetBackingTest
     HSet keySet();
+    All methods that modify map
+
+KeySetTest
     All methods of HSet on HSet keySet();
         int size();
             testSizeOnEmptySet
@@ -179,17 +182,14 @@ ValuesCollectionIteratorTest
             testRemoveIllegalState
             testRemoveTwice
 
-EntrySetTest
+EntrySetBackingTest
     HSet entrySet();
+    All methods that modify map
+
+EntrySetTest
     All methods of HSet on HSet entrySet();
 
 EntrySetIteratorTest
     All methods of HIterator on HSet entrySet();
 
 
-Summary	Che cosa verifica?
-Test Case Design	Perché serve questo caso? Il caso verifica il comportamento di [metodo] nella condizione [categoria del caso], allo scopo di verificare [parte del contratto].
-Test Description	Descrizione dell'intera sequenza Arrange → Act → Assert
-Pre-Condition	Stato ottenuto dopo Arrange, prima di Act
-Post-Condition	Stato dopo Act
-Expected Results	Condizione verificata in Assert

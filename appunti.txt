@@ -1,0 +1,6 @@
+Summary	Che cosa verifica?
+Test Case Design	Perché serve questo caso? Il caso verifica il comportamento di [metodo] nella condizione [categoria del caso], allo scopo di verificare [parte del contratto].
+Test Description	Descrizione dell'intera sequenza Arrange → Act → Assert
+Pre-Condition	Stato ottenuto dopo Arrange, prima di Act
+Post-Condition	Stato dopo Act
+Expected Results	Condizione verificata in Assert
