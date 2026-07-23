@@ -416,7 +416,6 @@ public class ValuesCollectionTest {
         //ASSERT
     }
 
-    // Object[] toArray(Object[] a); ---------------------------------------------------------------------------
     // boolean add(Object o); ----------------------------------------------------------------------------------
 
     /**
@@ -465,6 +464,9 @@ public class ValuesCollectionTest {
         assertFalse("Dopo la rimozione il valore non deve essere piu' presente nella collezione", values.contains("ALFA"));
         assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("BETA"));
         assertEquals("Dopo la rimozione la collezione non ha la dimensione corretta", 1, values.size());
+        assertFalse("Dopo la rimozione il valore non deve essere piu' presente nella mappa", map.containsValue("ALFA"));
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella mappa", map.containsValue("BETA"));
+        assertEquals("Dopo la rimozione la mappa non ha la dimensione corretta", 1, map.size());
     }
 
     /**
@@ -490,6 +492,8 @@ public class ValuesCollectionTest {
         assertTrue("Se il valore e' presente remove deve restituire true", removed);
         assertTrue("La rimozione deve rimuovere soltato una occorenza", values.contains("ALFA"));
         assertEquals("Dopo la rimozione la collezione non ha la dimensione corretta", 1, values.size());
+        assertFalse("La rimozione deve rimuovere soltato una occorenza nella mappa", map.containsValue("ALFA"));
+        assertEquals("Dopo la rimozione la mappa non ha la dimensione corretta", 1, map.size());
     }
 
     /**
@@ -516,6 +520,9 @@ public class ValuesCollectionTest {
         assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("ALFA"));
         assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("BETA"));
         assertEquals("La dimensione non deve cambiare", 2, values.size());
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella mappa", map.containsValue("ALFA"));
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella mappa", map.containsValue("BETA"));
+        assertEquals("La dimensione della mappa non deve cambiare", 2, map.size());
     }
 
     /**
@@ -713,6 +720,11 @@ public class ValuesCollectionTest {
         assertFalse("Dopo la rimozione il valore non deve essere piu' presente nella collezione", values.contains("CHARLIE"));
         assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("BETA"));
         assertEquals("Dopo la rimozione la collezione non ha la dimensione corretta", 1, values.size());
+
+        assertFalse("Dopo la rimozione il valore non deve essere piu' presente nella mappa", map.containsValue("ALFA"));
+        assertFalse("Dopo la rimozione il valore non deve essere piu' presente nella mappa", map.containsValue("CHARLIE"));
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella mappa", map.containsValue("BETA"));
+        assertEquals("Dopo la rimozione la mappa non ha la dimensione corretta", 1, map.size());
     }
 
     /**
@@ -743,6 +755,10 @@ public class ValuesCollectionTest {
         assertFalse("Dopo la rimozione il valore non deve essere piu' presente nella collezione", values.contains("ALFA"));
         assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("BETA"));
         assertEquals("Dopo la rimozione la collezione non ha la dimensione corretta", 1, values.size());
+
+        assertFalse("Dopo la rimozione il valore non deve essere piu' presente nella mappa", map.containsValue("ALFA"));
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella mappa", map.containsValue("BETA"));
+        assertEquals("Dopo la rimozione la mappa non ha la dimensione corretta", 1, map.size());
     }
 
     /**
@@ -775,6 +791,11 @@ public class ValuesCollectionTest {
         assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("BETA"));
         assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("CHARLIE"));
         assertEquals("Se la rimozione non avviene la dimensione della collezione deve rimanere invariata", 3, values.size());
+
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella mappa", map.containsValue("ALFA"));
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella mappa", map.containsValue("BETA"));
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella mappa", map.containsValue("CHARLIE"));
+        assertEquals("Se la rimozione non avviene la dimensione della mappa deve rimanere invariata", 3, map.size());
     }
 
     /**
@@ -830,6 +851,10 @@ public class ValuesCollectionTest {
         assertTrue("Dopo retainAll il valore deve essere ancora presente nella collezione", values.contains("ALFA"));
         assertTrue("Dopo retainAll il valore deve essere ancora presente nella collezione", values.contains("BETA"));
         assertEquals("Se retainAll non modifica la collezione la dimensione della collezione deve restare invariata", 2, values.size());
+
+        assertTrue("Dopo retainAll il valore deve essere ancora presente nella mappa", map.containsValue("ALFA"));
+        assertTrue("Dopo retainAll il valore deve essere ancora presente nella mappa", map.containsValue("BETA"));
+        assertEquals("Se retainAll non modifica la collezione la dimensione della mappa deve restare invariata", 2, map.size());
     }
 
     /**
@@ -861,6 +886,10 @@ public class ValuesCollectionTest {
         assertTrue("Dopo retainAll il valore deve essere ancora presente nella collezione", values.contains("ALFA"));
         assertFalse("Dopo retainAll il valore non deve essere ancora presente nella collezione", values.contains("BETA"));
         assertEquals("Dopo che retainAll ha modificato la collezione la dimensione deve essere diminuita", 1, values.size());
+
+        assertTrue("Dopo retainAll il valore deve essere ancora presente nella mappa", map.containsValue("ALFA"));
+        assertFalse("Dopo retainAll il valore non deve essere ancora presente nella mappa", map.containsValue("BETA"));
+        assertEquals("Dopo che retainAll ha modificato la mappa la dimensione deve essere diminuita", 1, map.size());
     }
 
     /**
@@ -889,6 +918,10 @@ public class ValuesCollectionTest {
         assertFalse("Dopo retainAll il valore non deve essere piu' presente nella collezione", values.contains("ALFA"));
         assertFalse("Dopo retainAll il valore non deve essere piu' presente nella collezione", values.contains("BETA"));
         assertEquals("Dopo retainAll la collezione non ha la dimensione corretta", 0, values.size());
+
+        assertFalse("Dopo retainAll il valore non deve essere piu' presente nella mappa", map.containsValue("ALFA"));
+        assertFalse("Dopo retainAll il valore non deve essere piu' presente nella mappa", map.containsValue("BETA"));
+        assertEquals("Dopo retainAll la mappa non ha la dimensione corretta", 0, map.size());
     }
 
     /**
@@ -935,6 +968,9 @@ public class ValuesCollectionTest {
         //ASSERT
         assertTrue("La collezione vuota dopo aver chiamato clear() non è più vuota", values.isEmpty());
         assertEquals("La collezione vuota dopo aver chiamato clear() non ha dimensione 0", 0, values.size());
+
+        assertTrue("La mappa vuota dopo aver chiamato clear() sulla collezione non è più vuota", map.isEmpty());
+        assertEquals("La mappa vuota dopo aver chiamato clear() sulla collezione non ha dimensione 0", 0, map.size());
     }
 
     /**
@@ -959,6 +995,9 @@ public class ValuesCollectionTest {
         //ASSERT
         assertTrue("La collezione di valori non è vuota dopo aver chiamato clear()", values.isEmpty());
         assertEquals("La collezione di valori non ha dimensione 0 dopo aver chiamato clear()", 0, values.size());
+
+        assertTrue("La mappa non è vuota dopo aver chiamato clear() sulla collezione", map.isEmpty());
+        assertEquals("La mappa non ha dimensione 0 dopo aver chiamato clear() sulla collezione", 0, map.size());
     }
 
     // boolean equals(Object o); -------------------------------------------------------------------------------
