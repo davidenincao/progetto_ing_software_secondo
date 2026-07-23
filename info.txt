@@ -73,11 +73,11 @@ KeySetTest
         Object[] toArray();
         Object[] toArray(Object[] a);
         boolean add(Object o);
-            testAdd
+            testAddUnsupportedOperationException
         boolean remove(Object o);
         boolean containsAll(HCollection c);
         boolean addAll(HCollection c);
-            testAddAll
+            testAddAllUnsupportedOperationException
         boolean removeAll(HCollection c);
         boolean retainAll(HCollection c);
         void clear();
@@ -94,20 +94,60 @@ ValuesCollectionTest
     HCollection values();
     All methods of HCollection on HCollection values();
         int size();
+            testSizeOnEmptyCollection
+            testSizeAfterOneInsertion
         boolean isEmpty();
+            testIsEmptyOnEmptyCollection
+            testIsEmptyAfterOneInsertion
         boolean contains(Object o);
+            testContainsTrue
+            testContainsFalse
+            testContainsNullPointer
         HIterator iterator();
         Object[] toArray();
+            testToArray
+            testToArrayEmptyCollection
         Object[] toArray(Object[] a);
+            testToArrayWithArraySameSize
+            testToArrayWithArraySmallerSize
+            testToArrayWithArrayLargerSize
+            testToArrayWithArrayWrongClass
+            testToArrayWithArrayNull
         boolean add(Object o);
+            testAddUnsupportedOperationException
         boolean remove(Object o);
+            testRemovePresent
+            testRemoveOneOnly
+            testRemoveAbsent
+            testRemoveNullPointer
         boolean containsAll(HCollection c);
+            testContainsAllTrue
+            testContainsAllFalse
+            testContainsAllEmptyCollection
+            testContainsAllNullPointer
         boolean addAll(HCollection c);
+            testAddAllUnsupportedOperationException
         boolean removeAll(HCollection c);
+            testRemoveAllPresent
+            testRemoveAllMultipleInstances
+            testRemoveAllAbsent
+            testRemoveAllNullPointer
         boolean retainAll(HCollection c);
+            testRetainAllPresent
+            testRetainAllAbsent
+            testRetainAllEmptyList
+            testRetainAllNullPointer
         void clear();
+            testClearOnEmptyCollection
+            testClearOnNotEmptyCollection
         boolean equals(Object o);
+            testEqualsSameCollection
+            testEqualsWithDistinctCollectionsHavingSameValues
+            testEqualsWithDistinctEmptyCollections
+            testEqualsWithIncompatibleObject
+            testEqualsToNull
         int hashCode();
+            testHashCodeIsConsistent
 
 ValuesCollectionIteratorTest
     All methods of HIterator on HCollection values();

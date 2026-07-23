@@ -50,13 +50,13 @@ public class ValuesCollectionTest {
      * </ul>
      */
     @Test
-    public void testSizeOnEmptySet() {
+    public void testSizeOnEmptyCollection() {
         //ARRANGE
-        HSet keySet = map.keySet();
+        HCollection values = map.values();
         //ACT
-        int size = keySet.size();
+        int size = values.size();
         //ASSERT
-        assertEquals("Il set di chiavi appena creato non ha dimensione 0", 0, size);
+        assertEquals("La collezione di valori appena creata non ha dimensione 0", 0, size);
     }
 
     /**
@@ -74,11 +74,11 @@ public class ValuesCollectionTest {
     public void testSizeAfterOneInsertion() {
         //ARRANGE
         map.put("A", "ALFA");
-        HSet keySet = map.keySet();
+        HCollection values = map.values();
         //ACT
-        int size = keySet.size();
+        int size = values.size();
         //ASSERT
-        assertEquals("Il set di chiavi appena creato non ha dimensione 1", 1, size);
+        assertEquals("La collezione di valori appena creata non ha dimensione 1", 1, size);
     }
 
     // boolean isEmpty(); --------------------------------------------------------------------------------------
@@ -95,13 +95,13 @@ public class ValuesCollectionTest {
      * </ul>
      */
     @Test
-    public void testIsEmptyOnEmptySet() {
+    public void testIsEmptyOnEmptyCollection() {
         //ARRANGE
-        HSet keySet = map.keySet();
+        HCollection values = map.values();
         //ACT
-        boolean isEmpty = keySet.isEmpty();
+        boolean isEmpty = values.isEmpty();
         //ASSERT
-        assertTrue("Il set di chiavi appena creato non è vuoto", isEmpty);
+        assertTrue("La collezione di valori appena creata non è vuota", isEmpty);
     }
 
     /**
@@ -119,11 +119,11 @@ public class ValuesCollectionTest {
     public void testIsEmptyAfterOneInsertion() {
         //ARRANGE
         map.put("A", "ALFA");
-        HSet keySet = map.keySet();
+        HCollection values = map.values();
         //ACT
-        boolean isEmpty = keySet.isEmpty();
+        boolean isEmpty = values.isEmpty();
         //ASSERT
-        assertFalse("Il set di chiavi creato da una mappa con una entry è vuoto", isEmpty);
+        assertFalse("La collezione di valori creata da una mappa con una entry è vuota", isEmpty);
     }
 
     // boolean contains(Object o); -----------------------------------------------------------------------------
@@ -143,11 +143,11 @@ public class ValuesCollectionTest {
     public void testContainsTrue() {
         //ARRANGE
         map.put("A", "ALFA");
-        HSet keySet = map.keySet();
+        HCollection values = map.values();
         //ACT
-        boolean contains = keySet.contains(new String("A"));
+        boolean contains = values.contains(new String("ALFA"));
         //ASSERT
-        assertTrue("Se la chiave e' presente deve restituire true", contains);
+        assertTrue("Se il valore e' presente deve restituire true", contains);
     }
 
     /**
@@ -165,11 +165,11 @@ public class ValuesCollectionTest {
     public void testContainsFalse() {
         //ARRANGE
         map.put("A", "ALFA");
-        HSet keySet = map.keySet();
+        HCollection values = map.values();
         //ACT
-        boolean contains = keySet.contains("B");
+        boolean contains = values.contains("BETA");
         //ASSERT
-        assertFalse("Se la chiave non e' presente deve restituire false", contains);
+        assertFalse("Se il valore non e' presente deve restituire false", contains);
     }
 
     /**
@@ -187,14 +187,188 @@ public class ValuesCollectionTest {
     public void testContainsNullPointer() {
         //ARRANGE
         map.put("A", "ALFA");
-        HSet keySet = map.keySet();
+        HCollection values = map.values();
         //ACT
-        boolean contains = keySet.contains(null);
+        boolean contains = values.contains(null);
         //ASSERT
     }
 
     // HIterator iterator(); -----------------------------------------------------------------------------------
     // Object[] toArray(); -------------------------------------------------------------------------------------
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testToArray() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        //ACT
+        Object[] result = values.toArray();
+        //ASSERT
+        assertEquals("Collection size e array length non sono uguali", values.size(), result.length);
+        assertTrue("Il primo elemento nell'array non e' presente nella collezione", values.contains(result[0]));
+        assertTrue("Il secondo elemento nell'array non e' presente nella collezione", values.contains(result[1]));
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testToArrayEmptyCollection() {
+        //ARRANGE
+        HCollection values = map.values();
+        //ACT
+        Object[] result = values.toArray();
+        //ASSERT
+        assertEquals("La collezione vuota non ha generato un array vuoto", 0, result.length);
+    }
+
+    // Object[] toArray(Object[] a); ---------------------------------------------------------------------------
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testToArrayWithArraySameSize() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        //ACT
+        Object[] input = new Object[2];
+        Object[] result = values.toArray(input);
+        //ASSERT
+        assertSame("L'array ritornato non e' lo stesso dato in input", input, result);
+        assertTrue("Il primo elemento nell'array non e' presente nella collezione", values.contains(result[0]));
+        assertTrue("Il secondo elemento nell'array non e' presente nella collezione", values.contains(result[1]));
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testToArrayWithArraySmallerSize() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        //ACT
+        Object[] input = new String[1];
+        Object[] result = values.toArray(input);
+        //ASSERT
+        assertNotSame("L'array ritornato e' lo stesso dato in input", input, result);
+        assertEquals("L'array restituito deve avere lo stesso tipo runtime dell'array fornito", input.getClass(), result.getClass());
+        assertTrue("Il primo elemento nell'array non e' presente nella collezione", values.contains(result[0]));
+        assertTrue("Il secondo elemento nell'array non e' presente nella collezione", values.contains(result[1]));
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testToArrayWithArrayLargerSize() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        //ACT
+        Object[] input = new Object[3];
+        Object[] result = values.toArray(input);
+        //ASSERT
+        assertSame("L'array ritornato non e' lo stesso dato in input", input, result);
+        assertTrue("Il primo elemento nell'array non e' presente nella collezione", values.contains(result[0]));
+        assertTrue("Il secondo elemento nell'array non e' presente nella collezione", values.contains(result[1]));
+        assertNull("L'ultima cella dovrebbe essere null", result[2]);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test(expected = ArrayStoreException.class)
+    public void testToArrayWithArrayWrongClass() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        //ACT
+        Object[] input = new Integer[2];
+        Object[] result = values.toArray(input);
+        //ASSERT
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test(expected = NullPointerException.class)
+    public void testToArrayWithArrayNull() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        //ACT
+        Object[] result = values.toArray(null);
+        //ASSERT
+    }
+
     // Object[] toArray(Object[] a); ---------------------------------------------------------------------------
     // boolean add(Object o); ----------------------------------------------------------------------------------
 
@@ -210,16 +384,231 @@ public class ValuesCollectionTest {
      * </ul>
      */
     @Test(expected = UnsupportedOperationException.class)
-    public void testAdd() {
+    public void testAddUnsupportedOperationException() {
         //ARRANGE
-        HSet keySet = map.keySet();
+        HCollection values = map.values();
         //ACT
-        keySet.add("A");
+        values.add("A");
         //ASSERT
     }
 
     // boolean remove(Object o); -------------------------------------------------------------------------------
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testRemovePresent() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        //ACT
+        boolean removed = values.remove(new String("ALFA"));
+        //ASSERT
+        assertTrue("Se il valore e' presente remove deve restituire true", removed);
+        assertFalse("Dopo la rimozione il valore non deve essere piu' presente nella collezione", values.contains("ALFA"));
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("BETA"));
+        assertEquals("Dopo la rimozione la collezione non ha la dimensione corretta", 1, values.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testRemoveOneOnly() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "ALFA");
+        HCollection values = map.values();
+        //ACT
+        boolean removed = values.remove(new String("ALFA"));
+        //ASSERT
+        assertTrue("Se il valore e' presente remove deve restituire true", removed);
+        assertTrue("La rimozione deve rimuovere soltato una occorenza", values.contains("ALFA"));
+        assertEquals("Dopo la rimozione la collezione non ha la dimensione corretta", 1, values.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testRemoveAbsent() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        //ACT
+        boolean removed = values.remove(new String("DELTA"));
+        //ASSERT
+        assertFalse("Se il valore non e' presente remove deve restituire false", removed);
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("ALFA"));
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("BETA"));
+        assertEquals("La dimensione non deve cambiare", 2, values.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test(expected = NullPointerException.class)
+    public void testRemoveNullPointer() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        //ACT
+        boolean removed = values.remove(null);
+        //ASSERT
+    }
+
     // boolean containsAll(HCollection c); ---------------------------------------------------------------------
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testContainsAllTrue() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        map.put("C", "CHARLIE");
+        HCollection values = map.values();
+        HMap otherMap = new MapAdapter();
+        otherMap.put("X", new String("ALFA"));
+        otherMap.put("Y", new String("BETA"));
+        HCollection otherValues = otherMap.values();
+        //ACT
+        boolean contained = values.containsAll(otherValues);
+        //ASSERT
+        assertTrue("containsAll non restituisce true quando la collezione contiene tutti gli elementi", contained);
+        assertTrue("Dopo containsAll il valore deve essere ancora presente nella collezione", values.contains("ALFA"));
+        assertTrue("Dopo containsAll il valore deve essere ancora presente nella collezione", values.contains("BETA"));
+        assertTrue("Dopo containsAll il valore deve essere ancora presente nella collezione", values.contains("CHARLIE"));
+        assertEquals("La dimensione della collezione non deve cambiare", 3, values.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testContainsAllFalse() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        map.put("C", "CHARLIE");
+        HCollection values = map.values();
+        HMap otherMap = new MapAdapter();
+        otherMap.put("X", new String("ALFA"));
+        otherMap.put("Y", new String("YANKEE"));
+        HCollection otherValues = otherMap.values();
+        //ACT
+        boolean contained = values.containsAll(otherValues);
+        //ASSERT
+        assertFalse("containsAll non restituisce false quando la collezione non contiene tutti gli elementi", contained);
+        assertTrue("Dopo containsAll il valore deve essere ancora presente nella collezione", values.contains("ALFA"));
+        assertTrue("Dopo containsAll il valore deve essere ancora presente nella collezione", values.contains("BETA"));
+        assertTrue("Dopo containsAll il valore deve essere ancora presente nella collezione", values.contains("CHARLIE"));
+        assertEquals("La dimensione della collezione non deve cambiare", 3, values.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testContainsAllEmptyCollection() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        HMap otherMap = new MapAdapter();
+        HCollection otherValues = otherMap.values();
+        //ACT
+        boolean contained = values.containsAll(otherValues);
+        //ASSERT
+        assertTrue("containsAll non restituisce true quando la collezione è vuota", contained);
+        assertTrue("Dopo containsAll il valore deve essere ancora presente nella collezione", values.contains("ALFA"));
+        assertTrue("Dopo containsAll il valore deve essere ancora presente nella collezione", values.contains("BETA"));
+        assertEquals("La dimensione della collezione non deve cambiare", 2, values.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test(expected = NullPointerException.class)
+    public void testContainsAllNullPointer() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        //ACT
+        boolean contained = values.containsAll(null);
+        //ASSERT
+    }
+
     // boolean addAll(HCollection c); --------------------------------------------------------------------------
 
     /**
@@ -234,22 +623,437 @@ public class ValuesCollectionTest {
      * </ul>
      */
     @Test(expected = UnsupportedOperationException.class)
-    public void testAddAll() {
+    public void testAddAllUnsupportedOperationException() {
         //ARRANGE
-        HSet keySet = map.keySet();
+        HCollection values = map.values();
         HMap otherMap = new MapAdapter();
         otherMap.put("A", "ALFA");
-        HSet otherKeySet = otherMap.keySet();
+        HCollection otherValues = otherMap.values();
         //ACT
-        keySet.addAll(otherKeySet);
+        values.addAll(otherValues);
         //ASSERT
     }
 
     // boolean removeAll(HCollection c); -----------------------------------------------------------------------
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testRemoveAllPresent() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        map.put("C", "CHARLIE");
+        HCollection values = map.values();
+        HMap otherMap = new MapAdapter();
+        otherMap.put("X", new String("ALFA"));
+        otherMap.put("Y", new String("CHARLIE"));
+        HCollection otherValues = otherMap.values();
+        //ACT
+        boolean removed = values.removeAll(otherValues);
+        //ASSERT
+        assertTrue("Se il valore e' presente removeAll deve restituire true", removed);
+        assertFalse("Dopo la rimozione il valore non deve essere piu' presente nella collezione", values.contains("ALFA"));
+        assertFalse("Dopo la rimozione il valore non deve essere piu' presente nella collezione", values.contains("CHARLIE"));
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("BETA"));
+        assertEquals("Dopo la rimozione la collezione non ha la dimensione corretta", 1, values.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testRemoveAllMultipleInstances() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        map.put("C", "ALFA");
+        HCollection values = map.values();
+        HMap otherMap = new MapAdapter();
+        otherMap.put("X", new String("ALFA"));
+        HCollection otherValues = otherMap.values();
+        //ACT
+        boolean removed = values.removeAll(otherValues);
+        //ASSERT
+        assertTrue("Se il valore e' presente removeAll deve restituire true", removed);
+        assertFalse("Dopo la rimozione il valore non deve essere piu' presente nella collezione", values.contains("ALFA"));
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("BETA"));
+        assertEquals("Dopo la rimozione la collezione non ha la dimensione corretta", 1, values.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testRemoveAllAbsent() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        map.put("C", "CHARLIE");
+        HCollection values = map.values();
+        HMap otherMap = new MapAdapter();
+        otherMap.put("X", new String("DELTA"));
+        otherMap.put("Y", new String("YANKEE"));
+        HCollection otherValues = otherMap.values();
+        //ACT
+        boolean removed = values.removeAll(otherValues);
+        //ASSERT
+        assertFalse("Se il valore non e' presente removeAll deve restituire false", removed);
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("ALFA"));
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("BETA"));
+        assertTrue("Dopo la rimozione il valore deve essere ancora presente nella collezione", values.contains("CHARLIE"));
+        assertEquals("Se la rimozione non avviene la dimensione della collezione deve rimanere invariata", 3, values.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test(expected = NullPointerException.class)
+    public void testRemoveAllNullPointer() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        //ACT
+        boolean removed = values.removeAll(null);
+        //ASSERT
+    }
+
     // boolean retainAll(HCollection c); -----------------------------------------------------------------------
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testRetainAllPresent() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        HMap otherMap = new MapAdapter();
+        otherMap.put("C", "CHARLIE");
+        otherMap.put("X", new String("ALFA"));
+        otherMap.put("Y", new String("BETA"));
+        HCollection otherValues = otherMap.values();
+        //ACT
+        boolean retained = values.retainAll(otherValues);
+        //ASSERT
+        assertFalse("Se retainAll non modifica la collezione deve restituire false", retained);
+        assertTrue("Dopo retainAll il valore deve essere ancora presente nella collezione", values.contains("ALFA"));
+        assertTrue("Dopo retainAll il valore deve essere ancora presente nella collezione", values.contains("BETA"));
+        assertEquals("Se retainAll non modifica la collezione la dimensione della collezione deve restare invariata", 2, values.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testRetainAllAbsent() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        HMap otherMap = new MapAdapter();
+        otherMap.put("C", "CHARLIE");
+        otherMap.put("X", new String("ALFA"));
+        otherMap.put("Y", "YANKEE");
+        HCollection otherValues = otherMap.values();
+        //ACT
+        boolean retained = values.retainAll(otherValues);
+        //ASSERT
+        assertTrue("Se retainAll modifica la collezione deve restituire true", retained);
+        assertTrue("Dopo retainAll il valore deve essere ancora presente nella collezione", values.contains("ALFA"));
+        assertFalse("Dopo retainAll il valore non deve essere ancora presente nella collezione", values.contains("BETA"));
+        assertEquals("Dopo che retainAll ha modificato la collezione la dimensione deve essere diminuita", 1, values.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testRetainAllEmptyCollection() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        HMap otherMap = new MapAdapter();
+        HCollection otherValues = otherMap.values();
+        //ACT
+        boolean retained = values.retainAll(otherValues);
+        //ASSERT
+        assertTrue("Se retainAll modifica la collezione deve restituire true", retained);
+        assertFalse("Dopo retainAll il valore non deve essere piu' presente nella collezione", values.contains("ALFA"));
+        assertFalse("Dopo retainAll il valore non deve essere piu' presente nella collezione", values.contains("BETA"));
+        assertEquals("Dopo retainAll la collezione non ha la dimensione corretta", 0, values.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test(expected = NullPointerException.class)
+    public void testRetainAllNullPointer() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        //ACT
+        boolean retained = values.retainAll(null);
+        //ASSERT
+    }
+
     // void clear(); -------------------------------------------------------------------------------------------
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testClearOnEmptyCollection() {
+        //ARRANGE
+        HCollection values = map.values();
+        //ACT
+        values.clear();
+        //ASSERT
+        assertTrue("La collezione vuota dopo aver chiamato clear() non è più vuota", values.isEmpty());
+        assertEquals("La collezione vuota dopo aver chiamato clear() non ha dimensione 0", 0, values.size());
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testClearOnNotEmptyCollection() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        //ACT
+        values.clear();
+        //ASSERT
+        assertTrue("La collezione di valori non è vuota dopo aver chiamato clear()", values.isEmpty());
+        assertEquals("La collezione di valori non ha dimensione 0 dopo aver chiamato clear()", 0, values.size());
+    }
+
     // boolean equals(Object o); -------------------------------------------------------------------------------
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testEqualsSameCollection() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        //ACT
+        boolean result = values.equals(values);
+        //ASSERT
+        assertTrue("La collezione deve essere uguale a se stessa", result);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testEqualsWithDistinctCollectionsHavingSameValues() {
+        //ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HMap otherMap = new MapAdapter();
+        otherMap.put(new String("B"), new String("BETA"));
+        otherMap.put(new String("A"), new String("ALFA"));
+        HCollection values = map.values();
+        HCollection otherValues = otherMap.values();
+        // ACT
+        boolean result = values.equals(otherValues);
+        // ASSERT
+        assertFalse("Due collezioni di valori distinte non devono essere uguali, anche se contengono gli stessi elementi", result);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testEqualsWithDistinctEmptyCollections() {
+        //ARRANGE
+        HMap otherMap = new MapAdapter();
+        HCollection values = map.values();
+        HCollection otherValues = otherMap.values();
+        //ACT
+        boolean result = values.equals(otherValues);
+        //ASSERT
+        assertFalse("Due collezioni distinte vuote non devono essere uguali", result);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testEqualsWithIncompatibleObject() {
+        //ARRANGE
+        HCollection values = map.values();
+        //ACT
+        boolean result = values.equals("A");
+        //ASSERT
+        assertFalse("Una collezione non puó essere uguale a un oggetto diverso", result);
+    }
+
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testEqualsToNull() {
+        //ARRANGE
+        HCollection values = map.values();
+        //ACT
+        boolean result = values.equals(null);
+        //ASSERT
+        assertFalse("Una collezione non puó essere uguale a null", result);
+    }
+
     // int hashCode(); -----------------------------------------------------------------------------------------
 
-
+    /**
+     * <h4>Test Method - test</h4>
+     * <ul>
+     * <li><b>Summary:</b> </li>
+     * <li><b>Test Method Design:</b> </li>
+     * <li><b>Test Description:</b> </li>
+     * <li><b>Pre-Condition:</b> </li>
+     * <li><b>Post-Condition:</b> </li>
+     * <li><b>Expected Results:</b> </li>
+     * </ul>
+     */
+    @Test
+    public void testHashCodeIsConsistent() {
+        // ARRANGE
+        map.put("A", "ALFA");
+        map.put("B", "BETA");
+        HCollection values = map.values();
+        // ACT
+        int firstResult = values.hashCode();
+        int secondResult = values.hashCode();
+        // ASSERT
+        assertEquals("Invocazioni ripetute di hashCode() sulla stessa collezione devono restituire lo stesso valore", firstResult, secondResult);
+    }
 }

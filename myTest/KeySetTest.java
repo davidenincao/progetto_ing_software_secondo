@@ -234,7 +234,7 @@ public class KeySetTest {
      * </ul>
      */
     @Test(expected = UnsupportedOperationException.class)
-    public void testAdd() {
+    public void testAddUnsupportedOperationException() {
         //ARRANGE
         HSet keySet = map.keySet();
         //ACT
@@ -258,7 +258,7 @@ public class KeySetTest {
      * </ul>
      */
     @Test(expected = UnsupportedOperationException.class)
-    public void testAddAll() {
+    public void testAddAllUnsupportedOperationException() {
         //ARRANGE
         HSet keySet = map.keySet();
         HMap otherMap = new MapAdapter();
