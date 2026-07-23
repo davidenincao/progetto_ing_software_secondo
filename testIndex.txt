@@ -58,7 +58,15 @@ MapAdapterTest
 
 KeySetBackingTest
     HSet keySet();
+        testKeySetEmptyMap
+        testKeySetMap
     All methods that modify map
+        testKeySetBackedOnMapPutNewAssociation
+        testKeySetBackedOnMapPutUpdateAssociation
+        testKeySetBackedOnMapRemove
+        testKeySetBackedOnMapPutAllWithNewAssociations
+        testKeySetBackedOnMapPutAllWithExistingAssociations
+        testKeySetBackedOnMapClear
 
 KeySetTest
     All methods of HSet on HSet keySet();

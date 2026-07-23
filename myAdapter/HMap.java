@@ -90,8 +90,22 @@ public interface HMap {
     */
     HSet keySet();
 
+    /**
+    * Restituisce un HCollection che è una vista dei valori presenti in questa mappa. Le modifiche alla mappa si riflettono nell'HCollection e 
+    * viceversa. Se la mappa viene modificata mentre si itera sull'HCollection, il comportamento dell'iteratore è indefinito. 
+    * Non supporta add e addAll.
+    * 
+    * @return un HCollection che è una vista dei valori presenti in questa mappa.
+    */
     HCollection values();
 
+    /**
+    * Restituisce un HSet che è una vista delle coppie chiave-valore presenti in questa mappa. Le modifiche alla mappa 
+    * si riflettono nell'HSet e viceversa. Se la mappa viene modificata mentre si itera sull'HSet, il comportamento dell'iteratore 
+    * è indefinito. Non supporta add e addAll.
+    * 
+    * @return un HSet che è una vista delle coppie chiave-valore presenti in questa mappa.
+    */
     HSet entrySet();
 
     /**

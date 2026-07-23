@@ -35,30 +35,6 @@ public class KeySetTest {
 		map = null;
 	}
 
-
-    // HSet keySet(); ------------------------------------------------------------------------------------------
-
-    /**
-     * <h4>Test Method - test</h4>
-     * <ul>
-     * <li><b>Summary:</b> </li>
-     * <li><b>Test Method Design:</b> </li>
-     * <li><b>Test Description:</b> </li>
-     * <li><b>Pre-Condition:</b> </li>
-     * <li><b>Post-Condition:</b> </li>
-     * <li><b>Expected Results:</b> </li>
-     * </ul>
-     */
-    @Test
-    public void testKeySet() {
-        //ARRANGE
-        map.put("A", "ALFA");
-        //ACT
-        HSet keySet = map.keySet();
-        //ASSERT
-        assertTrue("La mappa non contiene la chiave", keySet.contains("A"));
-    }
-
     // All methods of HSet on HSet keySet(); ---------------------------------------------------------------------------------------------
     // int size(); ---------------------------------------------------------------------------------------------
 
