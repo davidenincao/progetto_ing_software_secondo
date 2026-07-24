@@ -174,7 +174,7 @@ ValuesCollectionTest
         int hashCode();
             testHashCodeIsConsistent
 
-ValuesCollectionIteratorTest
+ValuesIteratorTest
     All methods of HIterator on HCollection values();
         boolean hasNext();
             testHasNextOnEmptyCollection
@@ -226,5 +226,16 @@ EntrySetTest
 
 EntrySetIteratorTest
     All methods of HIterator on HSet entrySet();
-
-
+        boolean hasNext();
+            testHasNextOnEmptySet
+            testHasNextSetStart
+            testHasNextSetEnd
+        Object next();
+            testNextNoSuchElementException
+            testNextCompleteIteration
+            testNextCompleteIterationDuplicatedValues
+        void remove();
+            testRemoveLegalState
+            testRemoveAll
+            testRemoveIllegalState
+            testRemoveTwice
