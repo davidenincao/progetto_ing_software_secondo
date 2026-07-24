@@ -109,6 +109,8 @@ public class ValuesBackingTest {
         assertTrue("Dopo la rimozione il valore ALFA deve essere ancora presente nella collezione", values.contains("ALFA"));
     }
 
+    // All methods that modify map -----------------------------------------------------------------------------
+
     /**
      * <h4>Test Method - test</h4>
      * <ul>

@@ -123,4 +123,50 @@ public interface HMap {
     * @return il codice hash di questa mappa.
     */
     int hashCode();
+
+    /**
+     * Rappresenta un'associazione chiave-valore contenuta in una mappa.
+     */
+    public static interface Entry {
+
+        /**
+         * Restituisce la chiave di questa associazione.
+         *
+         * @return la chiave dell'associazione
+         */
+        Object getKey();
+
+        /**
+         * Restituisce il valore di questa associazione.
+         *
+         * @return il valore associato alla chiave
+         */
+        Object getValue();
+
+        /**
+         * Sostituisce il valore associato alla chiave con quello specificato. il valore viene modificato anche nella mappa che contiene 
+         * questa entry.
+         *
+         * @param value il nuovo valore da associare alla chiave
+         * @return il valore precedentemente associato alla chiave
+         * @throws NullPointerException se {@code value} è {@code null}
+         */
+        Object setValue(Object value);
+
+        /**
+         * Confronta questa entry con l'oggetto specificato. Due entry sono considerate uguali se hanno chiavi e valori equivalenti.
+         *
+         * @param obj l'oggetto da confrontare
+         * @return {@code true} se l'oggetto è uguale a questa entry
+         */
+        boolean equals(Object obj);
+
+        /**
+         * Restituisce il codice hash dell'entry. L'hash code è calcolato come key.hashCode() ^ value.hashCode(), dove key e value 
+         * sono la chiave e il valore dell'entry entrambi non nulli.
+         *
+         * @return l'hash code dell'entry
+         */
+        int hashCode();
+    }
 }

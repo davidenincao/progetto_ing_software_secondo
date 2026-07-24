@@ -191,8 +191,35 @@ ValuesCollectionIteratorTest
             testRemoveTwice
 
 EntrySetBackingTest
+    Map.Entry class test
+        Object getKey();
+            testGetKey
+        Object getValue();
+            testGetValue
+        Object setValue(Object value);
+            testSetValue
+            testSetValueNullPointer
+        boolean equals(Object obj);
+            testEqualsWithEqualEntries
+            testEqualsWithDifferentKeys
+            testEqualsWithDifferentValues
+            testEqualsSameEntry
+            testEqualsToObject
+            testEqualsToNull
+        int hashCode();
+            testHashCodeExpected
+            testHashCodeEqualEntries
     HSet entrySet();
+        testEntrySetEmptyMap
+        testEntrySetMap
+        testEntrySetMapWithDuplicates
     All methods that modify map
+        testEntrySetBackedOnMapPutNewAssociation
+        testEntrySetBackedOnMapPutUpdateAssociation
+        testEntrySetBackedOnMapRemove
+        testEntrySetBackedOnMapPutAllWithNewAssociations
+        testEntrySetBackedOnMapPutAllWithExistingAssociations
+        testEntrySetBackedOnMapClear
 
 EntrySetTest
     All methods of HSet on HSet entrySet();

@@ -103,4 +103,45 @@ public class MapAdapter implements HMap {
     public int hashCode(){
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    private class EntryView implements HMap.Entry {
+
+        private final Object key;
+
+        private EntryView(Object key) {
+            this.key = key;
+        }
+
+        public Object getKey() {
+            return key;
+        }
+
+        public Object getValue() {
+            return table.get(key);
+        }
+
+        public Object setValue(Object value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+
+            return table.put(key, value);
+        }
+
+        public boolean equals(Object obj) {
+            if (!(obj instanceof HMap.Entry)) {
+                return false;
+            }
+
+            HMap.Entry other = (HMap.Entry) obj;
+
+            return key.equals(other.getKey())
+                && getValue().equals(other.getValue());
+        }
+
+        public int hashCode() {
+            return key.hashCode() ^ getValue().hashCode();
+        }
+    }
+    
 }

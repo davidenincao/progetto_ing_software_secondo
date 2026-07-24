@@ -4,3 +4,8 @@ Test Description	Descrizione dell'intera sequenza Arrange → Act → Assert
 Pre-Condition	Stato ottenuto dopo Arrange, prima di Act
 Post-Condition	Stato dopo Act
 Expected Results	Condizione verificata in Assert
+
+
+
+
+POssibili test interaziuone viste diverse
