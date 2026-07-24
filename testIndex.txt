@@ -98,8 +98,17 @@ KeySetTest
 KeySetIteratorTest
     All methods of HIterator on HSet keySet();
         boolean hasNext();
+            testHasNextOnEmptySet
+            testHasNextSetStart
+            testHasNextSetEnd
         Object next();
+            testNextNoSuchElementException
+            testNextCompleteIteration
         void remove();
+            testRemoveLegalState
+            testRemoveAll
+            testRemoveIllegalState
+            testRemoveTwice
 
 ValuesBackingTest
     HCollection values();
